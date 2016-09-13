@@ -119,7 +119,7 @@ int main(void)
 
    /* ------------- REPETIR POR SIEMPRE ------------- */
 	while(1) {
-
+		int i=0;
       valor = !digitalRead( TEC1 );
 		digitalWrite( LEDR, valor );
 		//ACA PONGO ALGO DE LA LIBRERIA PARA MIRAR
@@ -153,7 +153,7 @@ int main(void)
 
    	   	   	   	   Chip_GPIO_SetPinState( LPC_GPIO_PORT, gpioPort, gpioPin, value);
 
-   	   	   	   	   return ret_val;    //ES UN BOOLEANO QUE RETORNA TRUE O FALSE
+   	   	   	   	   return ret_val;    //ES UN BOOLEANO QUE RETORNA TRUE O FALSE?
 			}
 		 *
 		 */
@@ -166,7 +166,12 @@ int main(void)
 
       valor = !digitalRead( TEC4 );
 		digitalWrite( LED3, valor );
-
+		if ((valor=!digitalRead(TEC2))== OFF){  //no estoy seguro del uno
+			i++;
+		}
+		if (i==10){
+			digitalWrite( LED2, OFF);
+		}
 	}
 
 	/* NO DEBE LLEGAR NUNCA AQUI, debido a que a este
