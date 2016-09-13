@@ -125,22 +125,35 @@ int main(void)
 		//ACA PONGO ALGO DE LA LIBRERIA PARA MIRAR
 		/*	bool_t digitalWrite( int8_t pin, bool_t value ){
 
-   	   	   	   	   bool_t ret_val     = 1;
+   	   	   	   	   bool_t ret_val     = 1;  //desconozco la razon de esta linea
 
-   	   	   	   	   int8_t pinNamePort = 0;
-   	   	   	   	   int8_t pinNamePin  = 0;
+   	   	   	   	   int8_t pinNamePort = 0;  //declaracion de un nombre de puerto del pin
+   	   	   	   	   int8_t pinNamePin  = 0;  //declaracion del nombre del pin
 
-   	   	   	   	   int8_t func        = 0;
+   	   	   	   	   int8_t func        = 0; //declaracion de func
 
-   	   	   	   	   int8_t gpioPort    = 0;
-   	   	   	   	   int8_t gpioPin     = 0;
+   	   	   	   	   int8_t gpioPort    = 0;  //puerto gpio
+   	   	   	   	   int8_t gpioPin     = 0;  //pin gpio
 
+   	   	   	   	   //A CONTINUACION UNA FUNCION "OBTENER CONFIG DE PIN DIGITAL"
+					------------------------------------------------------------------
+					static void digitalObtainPinConfig( int8_t pin, int8_t config,
+                      int8_t *pinNamePort, int8_t *pinNamePin, int8_t *func,
+                      int8_t *gpioPort, int8_t *gpioPin ){
+
+						 *pinNamePort = digitalPinsConfig[pin].pinName.port;
+						 *pinNamePin  = digitalPinsConfig[pin].pinName.pin;
+						 *func        = digitalPinsConfig[pin].func;
+						 *gpioPort    = digitalPinsConfig[pin].gpio.port;
+						 *gpioPin     = digitalPinsConfig[pin].gpio.pin;
+						}
+					------------------------------------------------------------------
    	   	   	   	   digitalObtainPinConfig( pin, OUTPUT, &pinNamePort, &pinNamePin, &func,
                            	   	   	   	   &gpioPort, &gpioPin );
 
    	   	   	   	   Chip_GPIO_SetPinState( LPC_GPIO_PORT, gpioPort, gpioPin, value);
 
-   	   	   	   	   return ret_val;
+   	   	   	   	   return ret_val;    //ES UN BOOLEANO QUE RETORNA TRUE O FALSE
 			}
 		 *
 		 */
