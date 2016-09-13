@@ -122,7 +122,28 @@ int main(void)
 
       valor = !digitalRead( TEC1 );
 		digitalWrite( LEDR, valor );
+		//ACA PONGO ALGO DE LA LIBRERIA PARA MIRAR
+		/*	bool_t digitalWrite( int8_t pin, bool_t value ){
 
+   	   	   	   	   bool_t ret_val     = 1;
+
+   	   	   	   	   int8_t pinNamePort = 0;
+   	   	   	   	   int8_t pinNamePin  = 0;
+
+   	   	   	   	   int8_t func        = 0;
+
+   	   	   	   	   int8_t gpioPort    = 0;
+   	   	   	   	   int8_t gpioPin     = 0;
+
+   	   	   	   	   digitalObtainPinConfig( pin, OUTPUT, &pinNamePort, &pinNamePin, &func,
+                           	   	   	   	   &gpioPort, &gpioPin );
+
+   	   	   	   	   Chip_GPIO_SetPinState( LPC_GPIO_PORT, gpioPort, gpioPin, value);
+
+   	   	   	   	   return ret_val;
+			}
+		 *
+		 */
 	   valor = !digitalRead( TEC2 );
 	   digitalWrite( LED1, valor );
 
