@@ -159,6 +159,7 @@ int main(void)
 		 */
 	   valor = !digitalRead( TEC2 );
 	   digitalWrite( LED1, valor );
+	   digitalWrite( LEDG, valor );
 
       valor = !digitalRead( TEC3 );
 		digitalWrite( LED2, valor );
