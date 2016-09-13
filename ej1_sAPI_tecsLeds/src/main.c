@@ -121,7 +121,7 @@ int main(void)
 	while(1) {
 
       valor = !digitalRead( TEC1 );
-		digitalWrite( LEDB, valor );
+		digitalWrite( LEDR, valor );
 
 	   valor = !digitalRead( TEC2 );
 	   digitalWrite( LED1, valor );
