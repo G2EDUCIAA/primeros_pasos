@@ -218,15 +218,82 @@ __INLINE static void delay(uint32_t dlyTicks){
 
 /*==================[external functions definition]==========================*/
 
-/** \brief Main function
- *
- * This is the main entry point of the software.
- *
- * \returns 0
- *
- * \remarks This function never returns. Return value is only to avoid compiler
- *          warnings or errors.
- */
+
+__attribute__ ((section(".after_vectors")))
+void SysTick_Handler(void) {
+	msTicks++;
+}
+
+void uartConfig(uint32_t baudRate){
+
+   Chip_UART_Init(UART_USB);
+   Chip_UART_SetBaud(UART_USB, baudRate);  /* Set Baud rate */
+   Chip_UART_SetupFIFOS(UART_USB, UART_FCR_FIFO_EN | UART_FCR_TRG_LEV0); /* Modify FCR (FIFO Control Register)*/
+   Chip_UART_TXEnable(UART_USB); /* Enable UART Transmission */
+   Chip_SCU_PinMux(UART2_TXD_P, UART2_TXD_P_ , MD_PDN, FUNC6);              /* P7_1,FUNC6: UART2_TXD */
+   Chip_SCU_PinMux(UART2_RXD_P, UART2_RXD_P_ , MD_PLN|MD_EZI|MD_ZI, FUNC6); /* P7_2,FUNC6: UART2_RXD */
+
+   /* Enable UART Rx Interrupt */
+   Chip_UART_IntEnable(UART_USB, UART_IER_RBRINT ); /* Receiver Buffer Register Interrupt */
+   /* Enable UART line status interrupt */
+   Chip_UART_IntEnable(UART_USB, UART_IER_RLSINT ); /* LPC43xx User manual page 1118 */
+   NVIC_SetPriority(USART2_IRQn, 6);
+   /* Enable Interrupt for UART channel */
+   NVIC_EnableIRQ(USART2_IRQn);
+
+}
+
+void uartWriteByte(uint8_t byte){
+
+   while ((Chip_UART_ReadLineStatus(UART_USB) & UART_LSR_THRE) == 0); /* Wait for space in FIFO */
+   Chip_UART_SendByte(UART_USB, byte);
+}
+
+void uartWrite(uint8_t * str){
+
+   while(*str != 0){
+	  uartWriteByte(*str);
+	  *str++;
+   }
+}
+
+uint8_t uartReadByte(void){
+
+   uint8_t receivedByte = 0;
+
+   if (Chip_UART_ReadLineStatus(UART_USB) & UART_LSR_RDR) {
+      receivedByte = Chip_UART_ReadByte(UART_USB);
+      if(receivedByte=='1'){				//DENTRO DE SUBRUTINA DE LECTURA??
+      		   Chip_GPIO_SetValue(LPC_GPIO_PORT, LED2_GPIO, (1<<LED2_PIN));
+	   }
+      else{
+      		   Chip_GPIO_ClearValue(LPC_GPIO_PORT, LED2_GPIO, (1<<LED2_PIN));
+	   }
+   }
+   return receivedByte;
+}
+
+void UART2_IRQHandler(void){
+   uartWriteByte( uartReadByte() );
+}
+
+/* Set up and initialize board hardware */
+void boardInit(void) {
+
+   /* Config Core */
+   coreInit();
+
+   /* Initializes GPIO */
+   Chip_GPIO_Init(LPC_GPIO_PORT);
+
+   /* Config EDU-CIAA-NXP Button Pins */
+   boardButtonsInit();
+
+   /* Config EDU-CIAA-NXP Led Pins */
+   boardLedsInit();
+
+}
+
 
  /* FUNCION PRINCIPAL, PUNTO DE ENTRADA AL PROGRAMA LUEGO DE RESET. */
 int main(void)
