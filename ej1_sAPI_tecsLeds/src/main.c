@@ -119,7 +119,7 @@ int main(void)
 
    /* ------------- REPETIR POR SIEMPRE ------------- */
 	while(1) {
-		int i=0;
+/*		int i=0;
       valor = !digitalRead( TEC1 );
 		digitalWrite( LEDR, valor );
 		//ACA PONGO ALGO DE LA LIBRERIA PARA MIRAR
@@ -157,7 +157,7 @@ int main(void)
 			}
 		 *
 		 */
-	   valor = !digitalRead( TEC2 );
+/*	   valor = !digitalRead( TEC2 );
 	   digitalWrite( LED1, valor );
 	   digitalWrite( LEDG, valor );
 
@@ -171,7 +171,8 @@ int main(void)
 		}
 		if (i==10){
 			digitalWrite( LED2, OFF);
-		}
+		}*/
+
 	}
 
 	/* NO DEBE LLEGAR NUNCA AQUI, debido a que a este
