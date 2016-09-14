@@ -172,11 +172,11 @@ int main(void)
 		if (i==10){
 			digitalWrite( LED2, OFF);
 		}*/
-		while((digitalRead(TEC1)==ON)&&(digitalRead(TEC2)==ON)){
+		while((digitalRead(TEC1)==OFF)&&(digitalRead(TEC2)==OFF)){
 			digitalWrite( LEDB, ON);
 			digitalWrite( LED1, ON);
 		}
-		while((digitalRead(TEC3)==ON)&&(digitalRead(TEC4)==ON)){
+		while((digitalRead(TEC3)==OFF)&&(digitalRead(TEC4)==OFF)){
 					digitalWrite( LED2, ON);
 					digitalWrite( LED3, ON);
 		}
