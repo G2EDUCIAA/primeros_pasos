@@ -177,12 +177,14 @@ int main(void)
 				digitalWrite(LED1,valor);
 				digitalWrite(LEDG,valor);
 			}
+			valor=OFF;
 		}
 		if (valor=!digitalRead(TEC2)==ON){
 			if(valor=!digitalRead(TEC3)==ON){
 				digitalWrite(LED2,valor);
 				digitalWrite(LEDB,valor);
 			}
+			valor=OFF;
 		}
 
 
