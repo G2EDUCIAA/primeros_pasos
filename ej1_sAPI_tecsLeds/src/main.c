@@ -172,22 +172,18 @@ int main(void)
 		if (i==10){
 			digitalWrite( LED2, OFF);
 		}*/
-		if (valor=!digitalRead(TEC4)==ON){
-			if(valor=!digitalRead(TEC1)==ON){
-				digitalWrite(LED1,valor);
-				digitalWrite(LEDG,valor);
-			}
-			valor=OFF;
+		while((digitalRead(TEC1)==ON)&&(digitalRead(TEC2)==ON)){
+			digitalWrite( LEDB, ON);
+			digitalWrite( LED1, ON);
 		}
-		if (valor=!digitalRead(TEC2)==ON){
-			if(valor=!digitalRead(TEC3)==ON){
-				digitalWrite(LED2,valor);
-				digitalWrite(LEDB,valor);
-			}
-			valor=OFF;
+		while((digitalRead(TEC3)==ON)&&(digitalRead(TEC4)==ON)){
+					digitalWrite( LED2, ON);
+					digitalWrite( LED3, ON);
 		}
-
-
+		digitalWrite( LEDB, OFF);
+		digitalWrite( LED1, OFF);
+		digitalWrite( LED2, OFF);
+		digitalWrite( LED3, OFF);
 }
 
 	/* NO DEBE LLEGAR NUNCA AQUI, debido a que a este
