@@ -76,61 +76,6 @@
 #include "string.h"
 
 /*==================[macros and definitions]=================================*/
-#define TEC1_P    1
-#define TEC1_P_   0
-#define TEC1_GPIO 0
-#define TEC1_PIN  4
-
-#define TEC2_P    1
-#define TEC2_P_   1
-#define TEC2_GPIO 0
-#define TEC2_PIN  8
-
-#define TEC3_P    1
-#define TEC3_P_   2
-#define TEC3_GPIO 0
-#define TEC3_PIN  9
-
-#define TEC4_P    1
-#define TEC4_P_   6
-#define TEC4_GPIO 1
-#define TEC4_PIN  9
-
-#define LEDR_P    2
-#define LEDR_P_   0
-#define LEDR_GPIO 5
-#define LEDR_PIN  0
-
-#define LEDG_P    2
-#define LEDG_P_   1
-#define LEDG_GPIO 5
-#define LEDG_PIN  1
-
-#define LEDB_P    2
-#define LEDB_P_   2
-#define LEDB_GPIO 5
-#define LEDB_PIN  2
-
-#define LED1_P    2
-#define LED1_P_  10
-#define LED1_GPIO 0
-#define LED1_PIN 14
-
-#define LED2_P    2
-#define LED2_P_  11
-#define LED2_GPIO 1
-#define LED2_PIN 11
-
-#define LED3_P    2
-#define LED3_P_  12
-#define LED3_GPIO 1
-#define LED3_PIN 12
-
-#define INPUT     0
-#define OUTPUT    1
-
-#define ON        1
-#define OFF       0
 
 #define TICKRATE_HZ (1000) /* 1000 ticks per second --> 1ms Tick */
 
@@ -151,73 +96,8 @@
 
 /*==================[internal functions definition]==========================*/
 
-static void boardButtonsInit(void) {
-
-   /* Config EDU-CIAA-NXP Button Pins as GPIOs */
-   Chip_SCU_PinMux(TEC1_P, TEC1_P_, MD_PUP|MD_EZI|MD_ZI, FUNC0); /* P1_0,  GPIO0[4], TEC1 */
-   Chip_SCU_PinMux(TEC2_P, TEC2_P_, MD_PUP|MD_EZI|MD_ZI, FUNC0); /* P1_1,  GPIO0[8], TEC2 */
-   Chip_SCU_PinMux(TEC3_P, TEC3_P_, MD_PUP|MD_EZI|MD_ZI, FUNC0); /* P1_2,  GPIO0[9], TEC3 */
-	Chip_SCU_PinMux(TEC4_P, TEC4_P_, MD_PUP|MD_EZI|MD_ZI, FUNC0); /* P1_6,  GPIO1[9], TEC4 */
-
-   /* Config EDU-CIAA-NXP Button Pins as Inputs */
-   Chip_GPIO_SetDir(LPC_GPIO_PORT, TEC1_GPIO, (1<<TEC1_PIN), INPUT);
-   Chip_GPIO_SetDir(LPC_GPIO_PORT, TEC2_GPIO, (1<<TEC3_PIN), INPUT);
-   Chip_GPIO_SetDir(LPC_GPIO_PORT, TEC2_GPIO, (1<<TEC2_PIN), INPUT);
-   Chip_GPIO_SetDir(LPC_GPIO_PORT, TEC4_GPIO, (1<<TEC4_PIN), INPUT);
-
-}
-
-static void boardLedsInit(void) {
-
-   /* Config EDU-CIAA-NXP Led Pins as GPIOs */
-   Chip_SCU_PinMux(LEDR_P, LEDR_P_, MD_PUP, FUNC4); /* P2_0,  GPIO5[0],  LEDR */
-   Chip_SCU_PinMux(LEDG_P, LEDG_P_, MD_PUP, FUNC4); /* P2_1,  GPIO5[1],  LEDG */
-   Chip_SCU_PinMux(LEDB_P, LEDB_P_, MD_PUP, FUNC4); /* P2_2,  GPIO5[2],  LEDB */
-   Chip_SCU_PinMux(LED1_P, LED1_P_, MD_PUP, FUNC0); /* P2_10, GPIO0[14], LED1 */
-   Chip_SCU_PinMux(LED2_P, LED2_P_, MD_PUP, FUNC0); /* P2_11, GPIO1[11], LED2 */
-   Chip_SCU_PinMux(LED3_P, LED3_P_, MD_PUP, FUNC0); /* P2_12, GPIO1[12], LED3 */
-
-   /* Config EDU-CIAA-NXP Led Pins as Outputs */
-   Chip_GPIO_SetDir(LPC_GPIO_PORT, LEDR_GPIO, (1<<LEDR_PIN), OUTPUT);
-   Chip_GPIO_SetDir(LPC_GPIO_PORT, LEDG_GPIO, (1<<LEDG_PIN), OUTPUT);
-   Chip_GPIO_SetDir(LPC_GPIO_PORT, LEDB_GPIO, (1<<LEDB_PIN), OUTPUT);
-   Chip_GPIO_SetDir(LPC_GPIO_PORT, LED1_GPIO, (1<<LED1_PIN), OUTPUT);
-   Chip_GPIO_SetDir(LPC_GPIO_PORT, LED2_GPIO, (1<<LED2_PIN), OUTPUT);
-   Chip_GPIO_SetDir(LPC_GPIO_PORT, LED3_GPIO, (1<<LED3_PIN), OUTPUT);
-
-   /* Init EDU-CIAA-NXP Led Pins OFF */
-   Chip_GPIO_ClearValue(LPC_GPIO_PORT, LEDR_GPIO, (1<<LEDR_PIN));
-   Chip_GPIO_ClearValue(LPC_GPIO_PORT, LEDG_GPIO, (1<<LEDG_PIN));
-   Chip_GPIO_ClearValue(LPC_GPIO_PORT, LEDB_GPIO, (1<<LEDB_PIN));
-   Chip_GPIO_ClearValue(LPC_GPIO_PORT, LED1_GPIO, (1<<LED1_PIN));
-   Chip_GPIO_ClearValue(LPC_GPIO_PORT, LED2_GPIO, (1<<LED2_PIN));
-   Chip_GPIO_ClearValue(LPC_GPIO_PORT, LED3_GPIO, (1<<LED3_PIN));
-
-}
-
-static void coreInit(void) {
-
-   /* Read clock settings and update SystemCoreClock variable */
-   SystemCoreClockUpdate();
-
-   /* To configure the Systick timer we use the SysTick_Config(uint32_t ticks);
-    * funtion. With ticks we can set the Systick timer interval. In our case we
-    * have a 204 MHz clock and we want it to fire each ms. So the tick has to
-    * be set to 204 MHz / 1000.
-    */
-   SysTick_Config( SystemCoreClock / TICKRATE_HZ); /* TICKRATE_HZ ticks per second */
-}
-
-/* blocks for dlyTicks ms */
-__INLINE static void delay(uint32_t dlyTicks){
-    uint32_t curTicks;
-
-    curTicks = msTicks;
-    while ((msTicks - curTicks) < dlyTicks);
-}
 
 /*==================[external functions definition]==========================*/
-
 
 __attribute__ ((section(".after_vectors")))
 void SysTick_Handler(void) {
