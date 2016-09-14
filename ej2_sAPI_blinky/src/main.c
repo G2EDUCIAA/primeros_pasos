@@ -149,14 +149,14 @@ int main(void)
 		while((digitalRead(TEC1)==OFF)&&(digitalRead(TEC2)==OFF)){
 			digitalWrite( LEDB, ON);
 			digitalWrite( LED1, ON);
-			delay(250);
+			delay(1000);
 			digitalWrite( LEDB, OFF);
 			digitalWrite( LED1, OFF);
 		}
 		while((digitalRead(TEC3)==OFF)&&(digitalRead(TEC4)==OFF)){
 			digitalWrite( LED2, ON);
 			digitalWrite( LED3, ON);
-			delay(250);
+			delay(1000);
 			digitalWrite( LED2, OFF);
 			digitalWrite( LED3, OFF);
 		}
