@@ -121,11 +121,11 @@ int main(void)
 	while(1) {
 
 		/* Prendo el led azul */
-		digitalWrite( LED1, ON );
+		/*digitalWrite( LED1, ON );
 		digitalWrite( LED2, ON );
 		digitalWrite( LED3, ON );
 		digitalWrite( LEDB, ON );
-		delay(500);
+		delay(500);*/
 		//ciaaPOSIX_printf("Blinking\n");
 		// examino funcion delay
 		/*
@@ -140,12 +140,24 @@ int main(void)
 		 */
 
 		/* Apago el led azul */
-		digitalWrite( LED1, OFF );
+		/*digitalWrite( LED1, OFF );
 		digitalWrite( LED2, OFF );
 		digitalWrite( LED3, OFF );
 		digitalWrite( LEDB, ON );
 
-		delay(500);
+		delay(500);*/
+		while((digitalRead(TEC1)==OFF)&&(digitalRead(TEC2)==OFF)){
+			digitalWrite( LEDB, ON);
+			digitalWrite( LED1, ON);
+		}
+		while((digitalRead(TEC3)==OFF)&&(digitalRead(TEC4)==OFF)){
+			digitalWrite( LED2, ON);
+			digitalWrite( LED3, ON);
+		}
+		digitalWrite( LEDB, OFF);
+		digitalWrite( LED1, OFF);
+		digitalWrite( LED2, OFF);
+		digitalWrite( LED3, OFF);
 
 	}
 
