@@ -62,6 +62,8 @@
 #include "main.h"         /* <= own header */
 
 #include "sAPI.h"         /* <= sAPI header */
+#include "stdint.h"
+#include "string.h"
 
 /*==================[macros and definitions]=================================*/
 
