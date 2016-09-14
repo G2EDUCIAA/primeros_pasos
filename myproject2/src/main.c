@@ -144,10 +144,10 @@ uint8_t uartReadByte(void){
    if (Chip_UART_ReadLineStatus(UART_USB) & UART_LSR_RDR) {
       receivedByte = Chip_UART_ReadByte(UART_USB);
       if(receivedByte=='1'){				//DENTRO DE SUBRUTINA DE LECTURA??
-      		   Chip_GPIO_SetValue(LPC_GPIO_PORT, LED2_GPIO, (1<<LED2_PIN));
+    	  digitalWrite( LED1, ON);
 	   }
       else{
-      		   Chip_GPIO_ClearValue(LPC_GPIO_PORT, LED2_GPIO, (1<<LED2_PIN));
+    	  digitalWrite( LED1, OFF);
 	   }
    }
    return receivedByte;
@@ -158,22 +158,6 @@ void UART2_IRQHandler(void){
 }
 
 /* Set up and initialize board hardware */
-void boardInit(void) {
-
-   /* Config Core */
-   coreInit();
-
-   /* Initializes GPIO */
-   Chip_GPIO_Init(LPC_GPIO_PORT);
-
-   /* Config EDU-CIAA-NXP Button Pins */
-   boardButtonsInit();
-
-   /* Config EDU-CIAA-NXP Led Pins */
-   boardLedsInit();
-
-}
-
 
  /* FUNCION PRINCIPAL, PUNTO DE ENTRADA AL PROGRAMA LUEGO DE RESET. */
 int main(void)
