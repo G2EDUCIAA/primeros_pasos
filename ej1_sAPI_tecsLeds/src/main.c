@@ -172,8 +172,21 @@ int main(void)
 		if (i==10){
 			digitalWrite( LED2, OFF);
 		}*/
+		if (valor=!digitalRead(TEC4)==ON){
+			if(valor=!digitalRead(TEC1)==ON){
+				digitalWrite(LED1,valor);
+				digitalWrite(LEDG,valor);
+			}
+		}
+		if (valor=!digitalRead(TEC4)==ON){
+			if(valor=!digitalRead(TEC1)==ON){
+				digitalWrite(LED2,valor);
+				digitalWrite(LEDB,valor);
+			}
+		}
 
-	}
+
+}
 
 	/* NO DEBE LLEGAR NUNCA AQUI, debido a que a este
 	   programa no es llamado por ningun S.O. */
