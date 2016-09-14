@@ -132,6 +132,10 @@ int main(void)
     			tick_t curTicks = tickRead();
     			while ( (tickRead() - curTicks) < time/tickRateMS );
 			 }
+
+			tick_t tickRead( void ) {
+   	   	   	   return tickCounter;
+			}
 		 */
 
 		/* Apago el led azul */
