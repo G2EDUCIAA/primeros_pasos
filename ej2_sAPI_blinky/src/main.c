@@ -126,6 +126,7 @@ int main(void)
 		digitalWrite( LED3, ON );
 		digitalWrite( LEDB, ON );
 		delay(500);
+
 		// examino funcion delay
 		/*
 		 * void delay (tick_t time){
