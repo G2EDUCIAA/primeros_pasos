@@ -74,7 +74,7 @@
 
 #include "stdint.h"
 #include "string.h"
-
+#include "sAPI_Uart.h"
 /*==================[macros and definitions]=================================*/
 
 #define TICKRATE_HZ (1000) /* 1000 ticks per second --> 1ms Tick */
@@ -93,7 +93,7 @@
 /*==================[internal data definition]===============================*/
 
 /*==================[external data definition]===============================*/
-
+volatile uint32_t msTicks = 0;
 /*==================[internal functions definition]==========================*/
 
 
@@ -188,17 +188,18 @@ int main(void)
    digitalConfig( LED1, OUTPUT );
    digitalConfig( LED2, OUTPUT );
    digitalConfig( LED3, OUTPUT );
-
+   //uint8_t dato  = 0;
    /* ------------- REPETIR POR SIEMPRE ------------- */
 	while(1) {
-		while((digitalRead(TEC1)==OFF)&&(digitalRead(TEC2)==OFF)){
+		//dato = uartReadByte( UART_USB );
+		if((digitalRead(TEC1)==OFF)&&(digitalRead(TEC2)==OFF)&&){
 			digitalWrite( LEDB, ON);
 			digitalWrite( LED1, ON);
 			delay(1000);
 			digitalWrite( LEDB, OFF);
 			digitalWrite( LED1, OFF);
 		}
-		while((digitalRead(TEC3)==OFF)&&(digitalRead(TEC4)==OFF)){
+		if((digitalRead(TEC3)==OFF)&&(digitalRead(TEC4)==OFF)&&){
 			digitalWrite( LED2, ON);
 			digitalWrite( LED3, ON);
 			delay(1000);
