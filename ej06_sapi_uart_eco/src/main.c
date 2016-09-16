@@ -176,14 +176,14 @@ int main(void){
          a la UART_USB realizando un eco de lo que llega */
       if( dato ){
          //uartWriteByte( UART_USB, dato );
-    	  if((digitalRead(TEC1)==OFF)&&(digitalRead(TEC2)==OFF)&&){
+    	  if((digitalRead(TEC1)==OFF)&&(digitalRead(TEC2)==OFF)){
     	  			digitalWrite( LEDB, ON);
     	  			digitalWrite( LED1, ON);
     	  			delay(1000);
     	  			digitalWrite( LEDB, OFF);
     	  			digitalWrite( LED1, OFF);
     	  		}
-    	  		if((digitalRead(TEC3)==OFF)&&(digitalRead(TEC4)==OFF)&&){
+    	  		if((digitalRead(TEC3)==OFF)&&(digitalRead(TEC4)==OFF)){
     	  			digitalWrite( LED2, ON);
     	  			digitalWrite( LED3, ON);
     	  			delay(1000);
