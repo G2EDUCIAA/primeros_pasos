@@ -114,6 +114,7 @@ int main(void){
    digitalConfig( LED1, OUTPUT );
    digitalConfig( LED2, OUTPUT );
    digitalConfig( LED3, OUTPUT );
+   digitalConfig( DIO3, OUTPUT );
 
    /* Inicializar UART_USB a 115200 baudios */
    uartConfig( UART_USB, 115200 );
