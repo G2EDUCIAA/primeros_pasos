@@ -114,57 +114,36 @@ int main(void){
    digitalConfig( LED1, OUTPUT );
    digitalConfig( LED2, OUTPUT );
    digitalConfig( LED3, OUTPUT );
-   digitalConfig( DIO3, OUTPUT );
+   digitalConfig( DIO32, OUTPUT );    //nuevo
 
-   /* Inicializar UART_USB a 115200 baudios */
-   uartConfig( UART_USB, 115200 );
-   
-   uint8_t dato  = 0;
-   uint8_t dato1 = 1;
-   uint8_t dato2 = 78;
-   int32_t dato3 = 1234;
-
-   /* Buffer */
-   static uint8_t uartBuff[10];
-
-   unsigned char DISPLAY[10]= {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
-
-   /* ------------- REPETIR POR SIEMPRE ------------- */
-   while(1) {
-
-      /* Recibir byte de la UART_USB y guardarlo en la variable dato */
-      dato = uartReadByte( UART_USB );
-      
-      /* Si el byte recibido es distinto de 0 (caracter NULL) se reenvía 
-         a la UART_USB realizando un eco de lo que llega */
-      if( dato ){
-         //uartWriteByte( UART_USB, dato );
-    	  if((digitalRead(TEC1)==OFF)&&(digitalRead(TEC2)==OFF)){
-    	  			digitalWrite( LEDB, ON);
-    	  			digitalWrite( LED1, ON);
-    	  			delay(1000);
-    	  			digitalWrite( LEDB, OFF);
-    	  			digitalWrite( LED1, OFF);
-    	  		}
-    	  		if((digitalRead(TEC3)==OFF)&&(digitalRead(TEC4)==OFF)){
-    	  			digitalWrite( LED2, ON);
-    	  			digitalWrite( LED3, ON);
-    	  			delay(1000);
-    	  			digitalWrite( LED2, OFF);
-    	  			digitalWrite( LED3, OFF);
-    	  		}
-    	  		digitalWrite( LEDB, OFF);
-    	  		digitalWrite( LED1, OFF);
-    	  		digitalWrite( LED2, OFF);
-    	  		digitalWrite( LED3, OFF);
-
-      }
-
-   }
+   /* Inicializar UART_USB a 9600 baudios */
+   uartConfig( UART_USB, 9600 );
+  int caso;
+  uint8_t apretoTEC1[] = "TEC1\r\n";
+  uint8_t apretoTEC2[] = "TEC2\r\n";
+  while (1){
+	  if(digitalRead(TEC1)==OFF){
+		  caso=1;
+	  }
+	  if(digitalRead(TEC2)==OFF){
+		  caso=2;
+	  }
+	  switch(caso){
+	  	  case 1:
+	  		  digitalWrite(DIO32,ON);
+	  		  uartWriteString( UART_USB, apretoTEC1 );
+		  break;
+	  	  case 2:
+	  		  digitalWrite(DIO32,OFF);
+	  		  uartWriteString( UART_USB, apretoTEC2 );
+		  break;
+	  	  default: 2;
+	  }
+  }
 
    /* NO DEBE LLEGAR NUNCA AQUI, debido a que a este programa no es llamado
       por ningun S.O. */
-   return 0 ;
+   //return 0 ;
 }
 
 /*==================[end of file]============================================*/
