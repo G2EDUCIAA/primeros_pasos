@@ -62,7 +62,6 @@
 #include "main.h"         /* <= own header */
 
 #include "sAPI.h"         /* <= sAPI header */
-#include "chip.h"         /* <= sAPI header */
 
 /*==================[macros and definitions]=================================*/
 
@@ -96,11 +95,8 @@ int main(void)
    /* Inicializar la placa */
    boardConfig();
 
-   /* Inicializar el conteo de Ticks con resolución de 1ms */
-   tickConfig(1,0);
-
    /* Inicializar DigitalIO */
-   digitalConfig( 0, ENABLE_DIGITAL_IO );
+   digitalConfig( 0, ENABLE_DIGITAL_IO);
 
    /* Configuración de pines de entrada para
 	   Teclas de la CIAA-NXP */
@@ -108,7 +104,8 @@ int main(void)
    digitalConfig( TEC2, INPUT );
    digitalConfig( TEC3, INPUT );
    digitalConfig( TEC4, INPUT );
-
+   /* DESDE MAPA DE PERIFERICOS   GPIO0 = DIO32*/
+   digitalConfig( DIO32, INPUT_PULLUP ); //PARA CONECTAR CON PULLUP..segun facu es mas interesante
    /* Configuración de pines de salida para
 	   Leds de la CIAA-NXP */
    digitalConfig( LEDR, OUTPUT );
@@ -117,34 +114,78 @@ int main(void)
    digitalConfig( LED1, OUTPUT );
    digitalConfig( LED2, OUTPUT );
    digitalConfig( LED3, OUTPUT );
-   digitalConfig( DIO32, OUTPUT );
+
+   /* Variable para almacenar el valor de tecla leido */
+   bool_t valor;
 
    /* ------------- REPETIR POR SIEMPRE ------------- */
 	while(1) {
+/*		int i=0;
+      valor = !digitalRead( TEC1 );
+		digitalWrite( LEDR, valor );
+		//ACA PONGO ALGO DE LA LIBRERIA PARA MIRAR
+		/*	bool_t digitalWrite( int8_t pin, bool_t value ){
 
-		/* Prendo el led azul */
-		digitalWrite( DIO32, ON );
-		delay(500);
-		//ciaaPOSIX_printf("Blinking\n");
-		// examino funcion delay
-		/*
-		 * void delay (tick_t time){
-    			tick_t curTicks = tickRead();
-    			while ( (tickRead() - curTicks) < time/tickRateMS );
-			 }
+   	   	   	   	   bool_t ret_val     = 1;  //desconozco la razon de esta linea
 
-			tick_t tickRead( void ) {
-   	   	   	   return tickCounter;
+   	   	   	   	   int8_t pinNamePort = 0;  //declaracion de un nombre de puerto del pin
+   	   	   	   	   int8_t pinNamePin  = 0;  //declaracion del nombre del pin
+
+   	   	   	   	   int8_t func        = 0; //declaracion de func
+
+   	   	   	   	   int8_t gpioPort    = 0;  //puerto gpio
+   	   	   	   	   int8_t gpioPin     = 0;  //pin gpio
+
+   	   	   	   	   //A CONTINUACION UNA FUNCION "OBTENER CONFIG DE PIN DIGITAL"
+					------------------------------------------------------------------
+					static void digitalObtainPinConfig( int8_t pin, int8_t config,
+                      int8_t *pinNamePort, int8_t *pinNamePin, int8_t *func,
+                      int8_t *gpioPort, int8_t *gpioPin ){
+
+						 *pinNamePort = digitalPinsConfig[pin].pinName.port;
+						 *pinNamePin  = digitalPinsConfig[pin].pinName.pin;
+						 *func        = digitalPinsConfig[pin].func;
+						 *gpioPort    = digitalPinsConfig[pin].gpio.port;
+						 *gpioPin     = digitalPinsConfig[pin].gpio.pin;
+						}
+					------------------------------------------------------------------
+   	   	   	   	   digitalObtainPinConfig( pin, OUTPUT, &pinNamePort, &pinNamePin, &func,
+                           	   	   	   	   &gpioPort, &gpioPin );
+
+   	   	   	   	   Chip_GPIO_SetPinState( LPC_GPIO_PORT, gpioPort, gpioPin, value);
+
+   	   	   	   	   return ret_val;    //ES UN BOOLEANO QUE RETORNA TRUE O FALSE?
 			}
+		 *
 		 */
+/*	   valor = !digitalRead( TEC2 );
+	   digitalWrite( LED1, valor );
+	   digitalWrite( LEDG, valor );
 
+      valor = !digitalRead( TEC3 );
+		digitalWrite( LED2, valor );
 
-		digitalWrite( DIO32, OFF );
-
-
-		delay(500);
-
-	}
+      valor = !digitalRead( TEC4 );
+		digitalWrite( LED3, valor );
+		if ((valor=!digitalRead(TEC2))== OFF){  //no estoy seguro del uno
+			i++;
+		}
+		if (i==10){
+			digitalWrite( LED2, OFF);
+		}*/
+		while((digitalRead(TEC1)==OFF)&&(digitalRead(TEC2)==OFF)){
+			digitalWrite( LEDB, ON);
+			digitalWrite( LED1, ON);
+		}
+		while((digitalRead(TEC3)==OFF)&&(digitalRead(TEC4)==OFF)){
+					digitalWrite( LED2, ON);
+					digitalWrite( LED3, ON);
+		}
+		digitalWrite( LEDB, OFF);
+		digitalWrite( LED1, OFF);
+		digitalWrite( LED2, OFF);
+		digitalWrite( LED3, OFF);
+}
 
 	/* NO DEBE LLEGAR NUNCA AQUI, debido a que a este
 	   programa no es llamado por ningun S.O. */
