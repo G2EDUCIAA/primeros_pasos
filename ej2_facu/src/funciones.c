@@ -31,20 +31,15 @@ void maquina_estado()
 				{
 					LED_R();
 					estado = ROJO;
-		
 				}
-
 				break;
 			
 			case ROJO:
-			
 				if(PRESS())
 				{
 					LED_1();
 					estado = LED1;
-		
 				}
-
 				break;
 			
 			case LED1:
@@ -53,7 +48,6 @@ void maquina_estado()
 				{
 					LED_2();
 					estado = LED2;
-		
 				}
 
 				break;
@@ -64,7 +58,6 @@ void maquina_estado()
 				{
 					LED_3();
 					estado = LED3;
-		
 				}
 
 				break;
@@ -75,19 +68,16 @@ void maquina_estado()
 				{
 					LED_G();
 					estado = ROJO;
-		
 				}
 				if(PRESS_4())
 				{
 					LED_B();
 					estado = ROJO;
-		
 				}
 				if(PRESS_10())
 				{
 					LED_R();
 					BORROW();
-
 					estado = ROJO;
 		
 				}
@@ -192,14 +182,11 @@ int PRESS_10(void)
 */
 void LED_R(void)
 {
-	
-
 	//Codigo propio de la funcion
-
-
-
-	
-
+	digitalWrite(LEDR,ON);
+	digitalWrite(LED1,OFF);
+	digitalWrite(LED2,OFF);
+	digitalWrite(LED3,OFF);
 }
 
 /**
@@ -211,14 +198,11 @@ void LED_R(void)
 */
 void LED1(void)
 {
-	
-
 	//Codigo propio de la funcion
-
-
-
-	
-
+	digitalWrite(LEDR,OFF);
+	digitalWrite(LED1,ON);
+	digitalWrite(LED2,OFF);
+	digitalWrite(LED3,OFF);
 }
 
 /**
@@ -230,14 +214,11 @@ void LED1(void)
 */
 void LED2(void)
 {
-	
-
 	//Codigo propio de la funcion
-
-
-
-	
-
+	digitalWrite(LEDR,OFF);
+	digitalWrite(LED1,OFF);
+	digitalWrite(LED2,ON);
+	digitalWrite(LED3,OFF);
 }
 
 /**
@@ -249,14 +230,11 @@ void LED2(void)
 */
 void LED3(void)
 {
-	
-
 	//Codigo propio de la funcion
-
-
-
-	
-
+	digitalWrite(LEDR,OFF);
+	digitalWrite(LED1,OFF);
+	digitalWrite(LED2,OFF);
+	digitalWrite(LED3,ON);
 }
 
 /**
@@ -268,14 +246,11 @@ void LED3(void)
 */
 void LED_G(void)
 {
-	
-
 	//Codigo propio de la funcion
-
-
-
-	
-
+	digitalWrite(LEDG,ON);
+	digitalWrite(LED1,OFF);
+	digitalWrite(LED2,OFF);
+	digitalWrite(LED3,OFF);
 }
 
 /**
@@ -287,28 +262,13 @@ void LED_G(void)
 */
 void LED_B(void)
 {
-	
-
 	//Codigo propio de la funcion
-
-
-
-	
-
+	digitalWrite(LEDB,ON);
+	digitalWrite(LED1,OFF);
+	digitalWrite(LED2,OFF);
+	digitalWrite(LED3,OFF);
 }
 
-/**
-*	\fn void LED_R(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author FACUNDO
-*	\date 29-09-2016 20:56:05
-*/
-void LED_R(void)
-{
-	//Codigo propio de la funcion
-	digitalWrite(LEDR,ON);
-}
 
 /**
 *	\fn void BORROW(void)
