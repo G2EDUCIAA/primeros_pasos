@@ -23,9 +23,9 @@ int PRESS_10(void);
 
 //Prototipos de las acciones
 void LED_R(void);
-void LED1(void);
-void LED2(void);
-void LED3(void);
+void LED_1(void);
+void LED_2(void);
+void LED_3(void);
 void LED_G(void);
 void LED_B(void);
 void LED_R(void);
