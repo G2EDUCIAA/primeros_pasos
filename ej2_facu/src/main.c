@@ -61,7 +61,7 @@
 
 #include "main.h"         /* <= own header */
 
-#include "sAPI.h"         /* <= sAPI header */
+//#include "sAPI.h"         /* <= sAPI header */
 
 #include "funciones.h"		//incluyo
 /*==================[macros and definitions]=================================*/

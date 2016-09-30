@@ -9,7 +9,7 @@
 
 
 #include "funciones.h" 
-
+#include "sAPI.h"         /* <= sAPI header */
 //Implementacion Switch-Case
 
 /**
@@ -306,14 +306,8 @@ void LED_B(void)
 */
 void LED_R(void)
 {
-	
-
 	//Codigo propio de la funcion
-
-
-
-	
-
+	digitalWrite(LEDR,ON);
 }
 
 /**
