@@ -92,12 +92,12 @@
 int main(void)
 {
    /* Variable para almacenar el valor de tecla leido */
-   bool_t valor;
-  //int num;  //se supone que esta variable cuenta cuantas veces apreto tecla
+   bool_t valor;  //la dejo por las dudas..no creo que sirva
+
    void inicializar();
    /* ------------- REPETIR POR SIEMPRE ------------- */
 	while(1) {
-
+		maquina_estado();
 	}
 }
 void inicializar(){
