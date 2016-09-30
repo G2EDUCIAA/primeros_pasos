@@ -102,16 +102,12 @@ void maquina_estado()
 int PRESS(void)
 {
 	int res = 0 ;
-
 	//Codigo propio de la funcion
 	if(digitalRead(DIO32)==OFF){
 		res=1;
 		cont++;  //incremento contador
 	}
-
-
 	return res;
-
 }
 
 /**
@@ -124,13 +120,11 @@ int PRESS(void)
 int PRESS_4(void)
 {
 	int res = 0 ;
-
 	//Codigo propio de la funcion
-
-
-
+	if(cont==4){
+		res=1;
+	}
 	return res;
-
 }
 
 /**
@@ -143,13 +137,11 @@ int PRESS_4(void)
 int PRESS_7(void)
 {
 	int res = 0 ;
-
 	//Codigo propio de la funcion
-
-
-
+	if (cont==4){
+		res=1;
+	}
 	return res;
-
 }
 
 /**
@@ -162,11 +154,10 @@ int PRESS_7(void)
 int PRESS_10(void)
 {
 	int res = 0 ;
-
 	//Codigo propio de la funcion
-
-
-
+	if(cont==4){
+		res=1;
+	}
 	return res;
 
 }
@@ -272,20 +263,16 @@ void LED_B(void)
 
 /**
 *	\fn void BORROW(void)
-*	\brief Resumen
+*	\brief Renueva contador
 *	\details Detalles
 *	\author FACUNDO
 *	\date 29-09-2016 20:56:05
 */
 void BORROW(void)
 {
-	
-
 	//Codigo propio de la funcion
-
-
-
-	
-
+	if (cont==4){
+		cont=0;
+	}
 }
 
