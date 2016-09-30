@@ -138,7 +138,7 @@ int PRESS_7(void)
 {
 	int res = 0 ;
 	//Codigo propio de la funcion
-	if (cont==4){
+	if (cont==7){
 		res=1;
 	}
 	return res;
@@ -155,7 +155,7 @@ int PRESS_10(void)
 {
 	int res = 0 ;
 	//Codigo propio de la funcion
-	if(cont==4){
+	if(cont==10){
 		res=1;
 	}
 	return res;
@@ -271,7 +271,7 @@ void LED_B(void)
 void BORROW(void)
 {
 	//Codigo propio de la funcion
-	if (cont==4){
+	if (cont>=10){
 		cont=0;
 	}
 }
